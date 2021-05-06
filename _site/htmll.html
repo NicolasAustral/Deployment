@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>alg</title>
+
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.9.3/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">alg</h1>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#r-markdown"><span class="toc-section-number">0.1</span> R Markdown</a></li>
+</ul>
+</div>
+
+<div id="r-markdown" class="section level2" number="0.1">
+<h2 number="0.1"><span class="header-section-number">0.1</span> R Markdown</h2>
+<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
+<p>When you click the <strong>Knit</strong> button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
+<pre><code>## Warning: Ignoring unknown parameters: binwidth, bins, pad</code></pre>
+<p><img src="htmll_files/figure-html/dataset-1.png" /><!-- --></p>
+<p><img src="htmll_files/figure-html/womanInBetween20and40-1.png" /><!-- --></p>
+<p><img src="htmll_files/figure-html/menInBetween20and40-1.png" /><!-- --></p>
+<p><img src="htmll_files/figure-html/gender-1.png" /><!-- --></p>
+<p><img src="htmll_files/figure-html/diabetics-1.png" /><!-- --></p>
+<pre><code>## Warning: Ignoring 225 observations</code></pre>
+<div id="htmlwidget-9d6d0787fde15c676180" style="width:960px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9d6d0787fde15c676180">{"x":{"visdat":{"31a06bb91fb2":["function () ","plotlyVisDat"],"31a02b6479a0":["function () ","data"]},"cur_data":"31a02b6479a0","attrs":{"31a02b6479a0":{"color":["blue"],"alpha":0.6,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":[null,"DOBLE REEMPLAZO VALVULAR","RVAo + Aorta",null,"RVAo + Aorta",null,null,"CRM PURA",null,null,null,"RVAO","ANEURISMA AORTICO",null,"RVAo + Aorta","PLASTICA MITRAL","RVAo + Aorta","RVAO","REEMPLAZO VALVULAR PULMONAR","RVAO","RVAO",null,null,null,null,"CIA",null,null,null,null,null,null,null,"CRM PURA",null,null,"RVAO","RVAo + Aorta","CRM PURA",null,null,null,null,"TUMORES DE AURICULA","RVAO","RVAO","TROMBECTOMIA PULMONAR","RVAO",null,null,null,"PLASTICA MITRAL","PLASTICA MITRAL","RVAO",null,null,"RVAo + Aorta",null,null,null,null,null,null,"PLASTICA MITRAL","RVAO",null,null,null,null,null,null,null,null,null,null,"TUMORES DE AURICULA","CRM PURA",null,"PLASTICA MITRAL","PLASTICA MITRAL","RVAO","OTRA",null,null,"OTRA",null,null,null,"PLASTICA MITRAL","PLASTICA MITRAL","CRM PURA","RVAO","RVAo + Aorta","OTRA","RVAO",null,null,null,null,null,null,"CRM PURA",null,null,"RVAo + Aorta",null,null,"RVAO","CRM PURA",null,null,null,"RVAo + Aorta","RVAO",null,null,null,null,null,null,"OTRA","ANEURISMA AORTICO","OTRA","RVAO","OTRA","ANEURISMA AORTICO",null,"CRM PURA","RVAO","PERICARDIECTOMIA","CRM PURA","CRM PURA","CRM PURA","RVAO","ANEURISMA AORTICO",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,"RVAO",null,"CRM PURA",null,"PLASTICA MITRAL",null,null,null,null,"RVAO",null,null,"RVAO",null,null,null,"CIA",null,null,null,"RVAo + Aorta",null,null,"RVAO","PLASTICA MITRAL","PLASTICA MITRAL","OTRA","CRM PURA",null,"RVAO","RVAO","ANEURISMA AORTICO","RVAO",null,null,"RVAO","PLASTICA TRICUS, OTRA",null,"CRM PURA",null,"CRM PURA","PLASTICA MITRAL","PLASTICA MITRAL","CRM PURA","CRM PURA","CRM PURA",null,"RVAO","TROMBECTOMIA PULMONAR",null,"RVAO",null,"RVM","CRM PURA",null,null,"CRM PURA",null,null,"CRM PURA",null,"RVAo + Aorta","PLASTICA MITRAL",null,"RVAo + Aorta","PLASTICA MITRAL","PLASTICA MITRAL",null,null,"CRM PURA","RVAo + Aorta","RVAO",null,"OTRA","ANEURISMA AORTICO","RVAo + Aorta","RVM","OTRA",null,null,null,"OTRA",null,null,null,"CRM PURA",null,null,"CRM PURA",null,null,null,null,null,"CRM PURA","RVAO","RVAo + Aorta",null,null,null,"CRM PURA",null,null,null,"CRM PURA","OTRA",null,null,null,"CRM PURA",null,null,"REEMPLAZO VALVULAR PULMONAR",null,"PLASTICA MITRAL",null,null,null,null,null,null,"RVM","PLASTICA MITRAL","PLASTICA MITRAL",null,null,"PLASTICA MITRAL",null,"RVM","ANEURISMA AORTICO",null,null,null,"CRM PURA","CRM PURA","PLASTICA MITRAL",null,"OTRA","RVAO",null,null,"REEMPLAZO VALVULAR PULMONAR",null,null,null,null,null,null,"RVAO","CRM PURA","CRM PURA","RVAO","CRM PURA",null,"CRM PURA",null,"RVAO","CRM PURA","RVAO","PLASTICA MITRAL",null,null,null,"CRM PURA",null,null,null,null,"PLASTICA MITRAL","CRM PURA",null,null,null,"OTRA","CRM PURA","CRM PURA",null,null,null,"CRM PURA",null,"OTRA",null,"CRM PURA",null,"RVAO","OTRA",null,"CRM PURA",null,"CRM PURA","OTRA",null,null,null,null,"RVAO","RVAO",null,null,null,"RVAO",null,null,"PLASTICA MITRAL",null],"type":"histogram","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"overlay","title":"Histogram of surgeries and Diabetics","xaxis":{"domain":[0,1],"automargin":true,"title":[],"type":"category","categoryorder":"array","categoryarray":["ANEURISMA AORTICO","CIA","CRM PURA","DOBLE REEMPLAZO VALVULAR","OTRA","PERICARDIECTOMIA","PLASTICA MITRAL","PLASTICA TRICUS, OTRA","REEMPLAZO VALVULAR PULMONAR","RVAO","RVAo + Aorta","RVM","TROMBECTOMIA PULMONAR","TUMORES DE AURICULA"]},"yaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["DOBLE REEMPLAZO VALVULAR","RVAo + Aorta","RVAo + Aorta","CRM PURA","RVAO","ANEURISMA AORTICO","RVAo + Aorta","PLASTICA MITRAL","RVAo + Aorta","RVAO","REEMPLAZO VALVULAR PULMONAR","RVAO","RVAO","CIA","CRM PURA","RVAO","RVAo + Aorta","CRM PURA","TUMORES DE AURICULA","RVAO","RVAO","TROMBECTOMIA PULMONAR","RVAO","PLASTICA MITRAL","PLASTICA MITRAL","RVAO","RVAo + Aorta","PLASTICA MITRAL","RVAO","TUMORES DE AURICULA","CRM PURA","PLASTICA MITRAL","PLASTICA MITRAL","RVAO","OTRA","OTRA","PLASTICA MITRAL","PLASTICA MITRAL","CRM PURA","RVAO","RVAo + Aorta","OTRA","RVAO","CRM PURA","RVAo + Aorta","RVAO","CRM PURA","RVAo + Aorta","RVAO","OTRA","ANEURISMA AORTICO","OTRA","RVAO","OTRA","ANEURISMA AORTICO","CRM PURA","RVAO","PERICARDIECTOMIA","CRM PURA","CRM PURA","CRM PURA","RVAO","ANEURISMA AORTICO","RVAO","CRM PURA","PLASTICA MITRAL","RVAO","RVAO","CIA","RVAo + Aorta","RVAO","PLASTICA MITRAL","PLASTICA MITRAL","OTRA","CRM PURA","RVAO","RVAO","ANEURISMA AORTICO","RVAO","RVAO","PLASTICA TRICUS, OTRA","CRM PURA","CRM PURA","PLASTICA MITRAL","PLASTICA MITRAL","CRM PURA","CRM PURA","CRM PURA","RVAO","TROMBECTOMIA PULMONAR","RVAO","RVM","CRM PURA","CRM PURA","CRM PURA","RVAo + Aorta","PLASTICA MITRAL","RVAo + Aorta","PLASTICA MITRAL","PLASTICA MITRAL","CRM PURA","RVAo + Aorta","RVAO","OTRA","ANEURISMA AORTICO","RVAo + Aorta","RVM","OTRA","OTRA","CRM PURA","CRM PURA","CRM PURA","RVAO","RVAo + Aorta","CRM PURA","CRM PURA","OTRA","CRM PURA","REEMPLAZO VALVULAR PULMONAR","PLASTICA MITRAL","RVM","PLASTICA MITRAL","PLASTICA MITRAL","PLASTICA MITRAL","RVM","ANEURISMA AORTICO","CRM PURA","CRM PURA","PLASTICA MITRAL","OTRA","RVAO","REEMPLAZO VALVULAR PULMONAR","RVAO","CRM PURA","CRM PURA","RVAO","CRM PURA","CRM PURA","RVAO","CRM PURA","RVAO","PLASTICA MITRAL","CRM PURA","PLASTICA MITRAL","CRM PURA","OTRA","CRM PURA","CRM PURA","CRM PURA","OTRA","CRM PURA","RVAO","OTRA","CRM PURA","CRM PURA","OTRA","RVAO","RVAO","RVAO","PLASTICA MITRAL"],"type":"histogram","marker":{"color":"rgba(0,0,255,0.6)","line":{"color":"rgba(0,0,255,1)"}},"error_y":{"color":"rgba(0,0,255,0.6)"},"error_x":{"color":"rgba(0,0,255,0.6)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
