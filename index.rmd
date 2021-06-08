@@ -1,7 +1,7 @@
 ---
 title: 'Investigation and study of factors regarding coronary problems'
 author: "Lautaro Orlando, Pablo Villani, Juan Pablo Senmartin, Timoteo Sanchez, Nicolas Gamboa"
-date: '2020-06-29'
+date: '2021-06-08'
 output:
   html_document: 
     highlight: textmate
@@ -9,23 +9,23 @@ output:
     number_sections: yes
     self_contained: no
     theme: yeti
-    toc: yes
-    toc_depth: 2
+    toc: true
+    toc_depth: 3 # profundidad de tabla de contenidos
+    toc_float: true
 ---
 
-# Introduction 
+# Introduction {#Intro .tabset}
 
 The cardiologic service of Austral Hospital has given us a dataset that counts with 345 patients that suffer from some kind of coronary dysfunction.  In order to develop an accurate analysis and prediction according to the requirements entrusted to fulfill, we started searching papers and articles written by specialists on the subject so that we could get in sintony with the language used in the dataset. Once we acquired a certain level of knowledge, we lead off with the analysis and development of queries with the purpose of creating links between the different types of data inside the dataset, and portray this information on graphs.
 
-## Data Analysis
-En esta sección del reporte, se van a mostrar las queries diseñadas y el análisis de las mismas haciendo especial énfasis  los impactos de los diferentes factores en los problemas coronarios
+# Data Analysis {#DataAn .tabset}
+In this section of the report, it is going to be shown some of  the queries designed and the analysis making special focus on the impact of most of the factors concerning coronary issues.
 
-In this section of the report, it is going to be shown the queries designed and the analysis making special focus on the impact of most of the factors concerning coronary issues.
-
-### Gender 
+Gender 
 
 According to the National Heart, Lung and Blood Institute, the risk of suffering some kind of coronary complication in men starts to increase at the age of 45, while in women this trend appears at the age of 55. This is because, after the menopause, womens production of estrogen, a hormone that modulates the vascular function, decreases considerably. Besides, as people get older, the arteries and vessels become narrower. As it can be seen in the graphs, the most common reason of admission in both, men over the age of 45 and women  over the age of 55, is PROG CORONARIO (206 male patients and 27 female patients)
-/n
+
+
 
 
 ```{r, begging, fig.height=4, echo=FALSE, include=FALSE}
@@ -39,13 +39,13 @@ library(ggridges)
 library(plotrix)
 library(prettydoc)
 library(readxl)
+library(gridExtra)
 
 dataset <- read_excel("C:/Users/Nicolas/Downloads/dataset.xlsx")
 dataset$SEXO <- factor(dataset$SEXO, levels=c("MASC", "FEME"), labels=c("M","F"))
 ```
 
-
-```{r, motivoDeIngreso, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, motivoDeIngreso, echo=FALSE, message=FALSE, warning=FALSE, out.width="50%"}
 ##¿Cuál es el motivo de ingreso más común en hombres mayores a 45 años y en mujeres mayores a 55 años?
 mayoresA45Hombres<- dataset[which(dataset$`EDAD` >= 45 & dataset$SEXO == "M"),5]
 
@@ -53,15 +53,15 @@ mayoresA55Mujeres<- dataset[which(dataset$`EDAD` >= 55 & dataset$SEXO == "F"),5]
 
 plot_ly(alpha = 1, color=mayoresA45Hombres$`MOTIVO DE INGRESO`, colors = c("#58FAD0","#01DF74","#088A68","#01DFA5", "#0B614B", "#0B2F3A", "#086A87", "#01A9DB","#2ECCFA","#A9BCF5","#0080FF")) %>%
   add_histogram(x=mayoresA45Hombres$`MOTIVO DE INGRESO`,data=na.omit(mayoresA45Hombres)) %>%
-  layout(barmode = "overlay",showlegend = F, title = "Reasons for admission for men over 45 years of age", xaxis = list(title = "Reasons for admission"), yaxis = list(title = "Amount of people"))
+  layout(barmode = "overlay",showlegend = F, title = "Reasons for admission for men over 45 years of age", xaxis = list(title = "Reasons for admission"), yaxis = list(title = "Amount of people", dtick=40))
 
-plot_ly(alpha = 1, color=mayoresA55Mujeres$`MOTIVO DE INGRESO`, colors = c("#01DFA5", "#0B614B", "#0B2F3A", "#086A87", "#01A9DB","#2ECCFA","#A9BCF5")) %>%
+plot_ly(alpha = 1, color=mayoresA55Mujeres$'MOTIVO DE INGRESO', colors = c("#58FAD0", "#01DF74", "#0B614B","#0B2F3A", "#086A87", "#01A9DB","#2ECCFA")) %>%
   add_histogram(x=mayoresA55Mujeres$`MOTIVO DE INGRESO`,data=na.omit(mayoresA55Mujeres)) %>%
   layout(barmode = "overlay",showlegend = F, title = "Reasons for admission for women over 55 years of age", xaxis = list(title = "Reasons for admission"), yaxis = list(title = "Amount of people"))
 
 ```
 
-### FEY
+FEY 
 
 The FEY is a measurement expressed as a percentage of the amount of blood pushed out by the left ventricle with every heartbeat. The American Heart Association informs that a normal level of FEY is between 50 and 70. If the person has a fey under 50 and above 40 it's on the borderline, which does not necessarily mean that the person is suffering from a heart dysfunction. However, the critical values are found under 40 (that is considered too low and a potential patient with cardiomyopathy) and over 70 (very high level, possibly the person suffers hypertrophic cardiomyopathy).  Under the data given in the dataset, it can be seen that the mean of FEY equals to 57.14, which means that most of the patients included in the dataset have a normal level
 
@@ -83,9 +83,46 @@ ggplot(dataset, aes(x = FEY, fill = SEXO)) +
 
 ```
 
-### Previous intervention with complications 
+Angioplastied arteries
 
-Researchers from the Instituto de Cardiología y Cirugía Cardiovascular de La Habana (Cuba) did a study on 1264 patients from which a 21% of them presented a coronary preoperative intervention. Given the results, they concluded that this is one of the main risk factors that lead to postoperative and transoperative complications. Based on this, we decided to analyze the amount of  patients that had some kind of complication according to their previous clinical intervention. It resulted in 16 patients presenting complications: 4 were intervened by angioplasty previously, 1 by CRM and 11 by valvular.
+The “Revista Argentina de Cardiología '' has analyzed over 623 patients, with an average age of 62 years old,  in order to study the different damaged arteries that were angioplasted. According to their report, the most common arteries were: anterior descending artery or DA (49.3 %) , right coronary or CD (31.1 %), proximal circumflex or CX PROXIMAL (22.4 %) and lateral ventricle or LVX (5.1 %). Taking into consideration this study, we decided to do the same thing in our dataset but in a range of patients with an age between 50 and 70 years old. As it can be seen in the graph below, the cases found in our dataset follow the same logic from the study previously mentioned. 
+
+```{r, vasos, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
+##Cuales fueron los vasos angiplastiados mas comunes en pacientes?
+
+personasConVasosAngioplastiados <- dataset[which(!is.na(dataset$`VASOS ANGIOPLASTIADOS`)),c(48:56) ]
+
+CD <- group_by(personasConVasosAngioplastiados, CD) %>% summarise("count"=n())
+DA <- group_by(personasConVasosAngioplastiados, DA) %>% summarise("count"=n())
+CDPROXIMAL <- group_by(personasConVasosAngioplastiados, CDPROXIMAL) %>% summarise("count"=n())
+CXPROXIMAL <- group_by(personasConVasosAngioplastiados, CXPROXIMAL) %>% summarise("count"=n())
+LVCX <- group_by(personasConVasosAngioplastiados, LVCX) %>% summarise("count"=n())
+DAPROXIMAL <- group_by(personasConVasosAngioplastiados, DAPROXIMAL) %>% summarise("count"=n())
+DG <- group_by(personasConVasosAngioplastiados, DG) %>% summarise("count"=n())
+TCI <- group_by(personasConVasosAngioplastiados, TCI) %>% summarise("count"=n())
+
+
+# Create data
+data1 <- data.frame(
+  name=c("CD","DA","CDPROXIMAL","CXPROXIMAL","LVCX", "DAPROXIMAL", "DG", "TCI") ,  
+  value=c(CD$count[2], DA$count[2], CDPROXIMAL$count[2], CXPROXIMAL$count[2], LVCX$count[2], DAPROXIMAL$count[2], DG$count[2], TCI$count[2]))
+
+ggplot(data1, aes(x=data1$name, y=data1$value, fill=data1$name)) + 
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values= c("#01DFA5", "#0B614B", "#0B2F3A", "#086A87", "#01A9DB","#2ECCFA","#A9BCF5","#0080FF"))+
+  labs(x="Damaged artery", y="Amount of patients")+
+  theme(legend.position = "none")
+
+```
+
+
+# Interpretaton {#interpretation .tabset}
+
+This section of the report is specifically oriented to the interrelation of information belonging to the dataset and, under the grounds of the results achieved from the graphs, deduce and conclude certain aspects
+
+Previous intervention with complications
+
+Researchers from the Instituto de Cardiología y Cirugía Cardiovascular de La Habana (Cuba) did a study on 1264 patients from which 21% of them presented a coronary preoperative intervention. Given the results, they concluded that this is one of the main risk factors that lead to postoperative and transoperative complications. Based on this, we decided to analyze the amount of  patients that had some kind of complication according to their previous clinical intervention. It resulted in 16 patients presenting complications: 4 were intervened by angioplasty previously, 1 by CRM   and 11 by valvular.
 
 
 ```{r, intervencionPreviaConComplicaciones, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
@@ -102,6 +139,8 @@ plot_ly(alpha = 1, color=factor(intervencionPreviaConComplicaciones$'INTERVENCIO
   
   
 ```
+
+Another aspect that was analysed was the type of procedure done to each patient considering the type of diseases they suffer. Under the circumstances given in the dataset, it was designed a graph with the following results:
 
 ```{r, 3graficos, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -148,8 +187,16 @@ ggplot(data, aes(fill=Procedimientos, y=ejeY, x=ejeX)) +
 
 ```
 
+Diabetics are intervened mostly by angioplasty, although there is a significant number of surgeries, due to the fact that nowadays revascularization surgeries are becoming more common in this type of patients as a consequence of the number of complications in long term that angioplastic patients suffer.
+In hypertension cases there is a particularity: they are all intervened through surgery. A study from the Journal of the American College of Cardiology concluded that from 20 patients submitted by angioplasty a 20% suffered from aneurysm while the rest of the patients (16) that went to surgery did not have it. As these types of complications are commonly found in hypertense patients, angioplasty is chosen in order to reduce risks.
+Obese people most frequent procedure is as well surgery, even though that, in contrast with diabetes and hypertension, it is more balanced the use of the different procedures.
+
 
 Number of injuries
+
+In the medical field it is well known that as people grow older, the heart tends to enlarge slightly. Consequently, it develops thicker walls and the cavities enlarge as well. This increase  is mainly caused by an increase of size of the cardiac muscle cells. Due to it, we decided to evaluate if there is any correlation between the number of injuries in patients older than 70 years old.
+After analyzing the data accordingly it was found that male patients did increase their number of injuries when they became older.  This can be seen in the graphs by comparing the amount of percentage of an amount of lesions between each graph.
+
 
 ```{r, CantDeLesiones, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
 ####MAYORES A 70 HOMBRES
@@ -197,51 +244,6 @@ hmayoresA70paraHombres <- datamayoresA70paraHombres %>%
 
 hmayoresA70paraHombres
 
-
-
-##MAYORES A 70 MUJERES
-
-
-mayoresA70paraMujeres<- dataset[which(dataset$`EDAD` >= 70 & dataset$`SEXO` == "F"),47]
-mayoresA70paraMujeres <- na.omit(mayoresA70paraMujeres)
-
-mayoresA70paraMujeres0<- dataset[which(mayoresA70paraMujeres$`NUMERO DE LESIONES` == "0"),2]
-percentagemayoresA70paraMujeres0<- nrow(mayoresA70paraMujeres0) *100/nrow(mayoresA70paraMujeres)
-
-mayoresA70paraMujer1<- dataset[which(mayoresA70paraMujeres$`NUMERO DE LESIONES` == "1"),2]
-percentagemayoresA70paraMujeres1<- nrow(mayoresA70paraMujer1) *100/nrow(mayoresA70paraMujeres)
-
-mayoresA70paraMujeres2<- dataset[which(mayoresA70paraMujeres$`NUMERO DE LESIONES` == "2"),2]
-percentagemayoresA70paraMujeres2<- nrow(mayoresA70paraMujeres2) *100/nrow(mayoresA70paraMujeres)
-
-
-
-datamayoresA70paraMujeres <- data.frame(
-  x = c(0, 1, 2),
-  y = c(round(percentagemayoresA70paraMujeres0, 2), round(percentagemayoresA70paraMujeres1, 2), round(percentagemayoresA70paraMujeres2, 2)),
-  name = as.factor(c("0 injuries","1 injuries","2 injuries"))
-)
-
-
-hmayoresA70paraMujeres <- datamayoresA70paraMujeres %>%
-  hchart(
-    "pie", hcaes(x = name, y = y),
-    name = "Percentage of patients") %>%
-  hc_title(
-    text = "Amount of injuries for female patients older than 70 years old",
-    margin = 20,
-    align = "center",
-    style = list(color = "#22A884", useHTML = TRUE) 
-  ) %>% 
-  hc_colors(c("#01DFA5", "#0B614B", "#0B2F3A"))
-
-
-hmayoresA70paraMujeres
-
-
-
-
-
 ##MENORES A 70 HOMBRES
 
 menoresA70paraHombres<- dataset[which(dataset$EDAD < 70 & dataset$SEXO == "M"),47]
@@ -287,71 +289,11 @@ hmenoresA70paraHombres <- datamenoresA70paraHombres %>%
 
 hmenoresA70paraHombres
 
-
-
-##MENORES A 70 MUJERES
-
-
-
-
-menoresA70paraMujeres<- dataset[which(dataset$EDAD < 70 & dataset$SEXO == "F"),47]
-menoresA70paraMujeres<- na.omit(menoresA70paraMujeres)
-
-menoresA70paraMujeres0<- dataset[which(menoresA70paraMujeres$`NUMERO DE LESIONES` == "0"),2]
-percentagemenoresA70paraMujeres0<- nrow(menoresA70paraMujeres0) *100/nrow(menoresA70paraMujeres)
-
-menoresA70paraMujeres1<- dataset[which(menoresA70paraMujeres$`NUMERO DE LESIONES` == "1"),2]
-
-
-percentagemenoresA70paraMujeres1<- nrow(menoresA70paraMujeres1) *100/nrow(menoresA70paraMujeres)
-
-
-menoresA70paraMujeres2<- dataset[which(menoresA70paraMujeres$`NUMERO DE LESIONES` == "2"),2]
-
-
-percentagemenoresA70paraMujeres2<- nrow(menoresA70paraMujeres2) *100/nrow(menoresA70paraMujeres)
-
-
-menoresA70paraMujeres3<- dataset[which(menoresA70paraMujeres$`NUMERO DE LESIONES` == "3"),2]
-
-
-percentagemenoresA70paraMujeres3<- nrow(menoresA70paraMujeres3) *100/nrow(menoresA70paraMujeres)
-
-
-menoresA70paraMujeres4<- dataset[which(menoresA70paraMujeres$`NUMERO DE LESIONES` == "4"),2]
-
-
-percentagemenoresA70paraMujeres4<- nrow(menoresA70paraMujeres4) *100/nrow(menoresA70paraMujeres)
-
-
-
-datamenoresA70paraMujeres <- data.frame(
-  x = c(0, 1, 2, 3, 4),
-  y = c(round(percentagemenoresA70paraMujeres0, 2), round(percentagemenoresA70paraMujeres1, 2), round(percentagemenoresA70paraMujeres2, 2), round(percentagemenoresA70paraMujeres3, 2), round(percentagemenoresA70paraMujeres4, 2)),
-  name = as.factor(c("0 injuries","1 injuries","2 injuries","3 injuries","4 injuries"))
-)
-
-hmenoresA70paraMujeres <- datamenoresA70paraMujeres %>%
-  hchart(
-    "pie", hcaes(x = name, y = y),
-    name = "Percentage of patients") %>%
-  hc_title(
-    text = "Amount of injuries for female patients younger than 70 years old",
-    margin = 20,
-    align = "center",
-    style = list(color = "#22A884", useHTML = TRUE) 
-  ) %>% 
-  hc_colors(c("#01DFA5", "#0B614B", "#0B2F3A", "#086A87", "#01A9DB"))
-
-
-hmenoresA70paraMujeres
-
-
 ```
 
 
+Surgery with Myocardial revascularization surgery
 
-### Surgery with Myocardial revascularization surgery
 Coronary revascularization surgery by bypass is the most frequent surgery in patients with cardiovascular history thanks to its low cost and high effectiveness. This explains why from all the patients from the dataset that went to surgery, around a 72% of them went to coronary revascularization surgery 
 
 
@@ -389,37 +331,11 @@ hc
 ```
 
 
-Vasos angioplastiados
-```{r, vasos, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
-##Cuales fueron los vasos angiplastiados mas comunes en pacientes?
 
-personasConVasosAngioplastiados <- dataset[which(!is.na(dataset$`VASOS ANGIOPLASTIADOS`)),c(48:56) ]
+Correlation between pre existing deseases and complications 
 
-CD <- group_by(personasConVasosAngioplastiados, CD) %>% summarise("count"=n())
-DA <- group_by(personasConVasosAngioplastiados, DA) %>% summarise("count"=n())
-CDPROXIMAL <- group_by(personasConVasosAngioplastiados, CDPROXIMAL) %>% summarise("count"=n())
-CXPROXIMAL <- group_by(personasConVasosAngioplastiados, CXPROXIMAL) %>% summarise("count"=n())
-LVCX <- group_by(personasConVasosAngioplastiados, LVCX) %>% summarise("count"=n())
-DAPROXIMAL <- group_by(personasConVasosAngioplastiados, DAPROXIMAL) %>% summarise("count"=n())
-DG <- group_by(personasConVasosAngioplastiados, DG) %>% summarise("count"=n())
-TCI <- group_by(personasConVasosAngioplastiados, TCI) %>% summarise("count"=n())
-
-
-# Create data
-data1 <- data.frame(
-  name=c("CD","DA","CDPROXIMAL","CXPROXIMAL","LVCX", "DAPROXIMAL", "DG", "TCI") ,  
-  value=c(CD$count[2], DA$count[2], CDPROXIMAL$count[2], CXPROXIMAL$count[2], LVCX$count[2], DAPROXIMAL$count[2], DG$count[2], TCI$count[2]))
-
-ggplot(data1, aes(x=data1$name, y=data1$value, fill=data1$name)) + 
-  geom_bar(stat = "identity") +
-  scale_fill_manual(values= c("#01DFA5", "#0B614B", "#0B2F3A", "#086A87", "#01A9DB","#2ECCFA","#A9BCF5","#0080FF"))+
-  labs(x="Damaged artery", y="Amount of patients")+
-  theme(legend.position = "none")
-
-```
-### Correlation between pre existing deseases and complications
 The graph obtained portrays the number of patients with one or more pre existing diseases that suffer from some kind of cardiovascular complication. It can be seen that the vast majority of cases suffer from diabetes (9 patients from which 1 also suffers from hypertension), then it follows hypertension (8 patients; 1 suffers as well from diabetes and another from obesity ), and finally obesity with 2 patients, from which one also has hypertension.
+
 ```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '50%'}
   knitr::include_graphics("C:/Users/Nicolas/Desktop/R/r2/venn_diagramm.png")
 ```
-
