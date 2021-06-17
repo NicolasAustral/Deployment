@@ -23,9 +23,7 @@ In this section of the report, it is going to be shown some of  the queries desi
 
 Gender 
 
-According to the National Heart, Lung and Blood Institute, the risk of suffering some kind of coronary complication in men starts to increase at the age of 45, while in women this trend appears at the age of 55. This is because, after the menopause, womens production of estrogen, a hormone that modulates the vascular function, decreases considerably. Besides, as people get older, the arteries and vessels become narrower. As it can be seen in the graphs, the most common reason of admission in both, men over the age of 45 and women  over the age of 55, is PROG CORONARIO (206 male patients and 27 female patients)
-
-
+According to the [National Heart, Lung and Blood Institute](https://www.nhlbi.nih.gov/health-topics/coronary-heart-disease), the risk of suffering some kind of coronary complication in men starts to increase at the age of 45, while in women this trend appears at the age of 55. This is because, after the menopause, womens production of estrogen, a hormone that modulates the vascular function, decreases considerably. Besides, as people get older, the arteries and vessels become narrower. As it can be seen in the graphs, the most common reason of admission in both, men over the age of 45 and women  over the age of 55, is PROG CORONARIO (206 male patients and 27 female patients)
 
 
 ```{r, begging, fig.height=4, echo=FALSE, include=FALSE}
@@ -41,11 +39,12 @@ library(prettydoc)
 library(readxl)
 library(gridExtra)
 
-dataset <- read_excel("C:/Users/Nicolas/Downloads/dataset.xlsx")
+dataset <- read_excel("C:/Users/Usuario/Desktop/Timo Facu/Segundo año/1er Cutri/AyED R/dataset.xlsx")
 dataset$SEXO <- factor(dataset$SEXO, levels=c("MASC", "FEME"), labels=c("M","F"))
 ```
 
-```{r, motivoDeIngreso, echo=FALSE, message=FALSE, warning=FALSE, out.width="50%"}
+<div style="display:flex">
+```{r, motivoDeIngreso, echo=FALSE, message=FALSE, warning=FALSE}
 ##¿Cuál es el motivo de ingreso más común en hombres mayores a 45 años y en mujeres mayores a 55 años?
 mayoresA45Hombres<- dataset[which(dataset$`EDAD` >= 45 & dataset$SEXO == "M"),5]
 
@@ -53,17 +52,20 @@ mayoresA55Mujeres<- dataset[which(dataset$`EDAD` >= 55 & dataset$SEXO == "F"),5]
 
 plot_ly(alpha = 1, color=mayoresA45Hombres$`MOTIVO DE INGRESO`, colors = c("#58FAD0","#01DF74","#088A68","#01DFA5", "#0B614B", "#0B2F3A", "#086A87", "#01A9DB","#2ECCFA","#A9BCF5","#0080FF")) %>%
   add_histogram(x=mayoresA45Hombres$`MOTIVO DE INGRESO`,data=na.omit(mayoresA45Hombres)) %>%
-  layout(barmode = "overlay",showlegend = F, title = "Reasons for admission for men over 45 years of age", xaxis = list(title = "Reasons for admission"), yaxis = list(title = "Amount of people", dtick=40))
+  layout(barmode = "overlay",showlegend = F,  title = list(text="Reasons for admission for men over 45 years of age"), xaxis = list(title = "Reasons for admission"), yaxis = list(title = "Amount of people", dtick=40))
 
 plot_ly(alpha = 1, color=mayoresA55Mujeres$'MOTIVO DE INGRESO', colors = c("#58FAD0", "#01DF74", "#0B614B","#0B2F3A", "#086A87", "#01A9DB","#2ECCFA")) %>%
   add_histogram(x=mayoresA55Mujeres$`MOTIVO DE INGRESO`,data=na.omit(mayoresA55Mujeres)) %>%
   layout(barmode = "overlay",showlegend = F, title = "Reasons for admission for women over 55 years of age", xaxis = list(title = "Reasons for admission"), yaxis = list(title = "Amount of people"))
 
 ```
+</div> 
 
 FEY 
 
-The FEY is a measurement expressed as a percentage of the amount of blood pushed out by the left ventricle with every heartbeat. The American Heart Association informs that a normal level of FEY is between 50 and 70. If the person has a fey under 50 and above 40 it's on the borderline, which does not necessarily mean that the person is suffering from a heart dysfunction. However, the critical values are found under 40 (that is considered too low and a potential patient with cardiomyopathy) and over 70 (very high level, possibly the person suffers hypertrophic cardiomyopathy).  Under the data given in the dataset, it can be seen that the mean of FEY equals to 57.14, which means that most of the patients included in the dataset have a normal level
+The [FEY](https://www.heart.org/en/health-topics/heart-failure/diagnosing-heart-failure/ejection-fraction-heart-failure-measurement) is a measurement expressed as a percentage of the amount of blood pushed out by the left ventricle with every heartbeat. The American Heart Association informs that a normal level of FEY is between 50 and 70. If the person has a fey under 50 and above 40 it's on the borderline, which does not necessarily mean that the person is suffering from a heart dysfunction. However, the critical values are found under 40 (that is considered too low and a potential patient with cardiomyopathy) and over 70 (very high level, possibly the person suffers hypertrophic cardiomyopathy).  Under the data given in the dataset, it can be seen that the mean of FEY equals to 57.14, which means that most of the patients included in the dataset have a normal level of FEY.
+
+
 
 
 ```{r, mediaFey, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
@@ -85,7 +87,7 @@ ggplot(dataset, aes(x = FEY, fill = SEXO)) +
 
 Angioplastied arteries
 
-The “Revista Argentina de Cardiología '' has analyzed over 623 patients, with an average age of 62 years old,  in order to study the different damaged arteries that were angioplasted. According to their report, the most common arteries were: anterior descending artery or DA (49.3 %) , right coronary or CD (31.1 %), proximal circumflex or CX PROXIMAL (22.4 %) and lateral ventricle or LVX (5.1 %). Taking into consideration this study, we decided to do the same thing in our dataset but in a range of patients with an age between 50 and 70 years old. As it can be seen in the graph below, the cases found in our dataset follow the same logic from the study previously mentioned. 
+The [“Revista Argentina de Cardiología"](https://www.redalyc.org/pdf/3053/305326932005.pdf) has analyzed over 623 patients, with an average age of 62 years old,  in order to study the different damaged arteries that were angioplastied. According to their report, the most common arteries were: anterior descending artery or DA (49.3 %) , right coronary or CD (31.1 %), proximal circumflex or CX PROXIMAL (22.4 %) and lateral ventricle or LVX (5.1 %). Taking into consideration this study, we decided to do the same thing in our dataset but in a range of patients with an age between 50 and 70 years old. As it can be seen in the graph below, the cases found in our dataset follow the same logic from the study previously mentioned. 
 
 ```{r, vasos, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
 ##Cuales fueron los vasos angiplastiados mas comunes en pacientes?
@@ -122,7 +124,7 @@ This section of the report is specifically oriented to the interrelation of info
 
 Previous intervention with complications
 
-Researchers from the Instituto de Cardiología y Cirugía Cardiovascular de La Habana (Cuba) did a study on 1264 patients from which 21% of them presented a coronary preoperative intervention. Given the results, they concluded that this is one of the main risk factors that lead to postoperative and transoperative complications. Based on this, we decided to analyze the amount of  patients that had some kind of complication according to their previous clinical intervention. It resulted in 16 patients presenting complications: 4 were intervened by angioplasty previously, 1 by CRM   and 11 by valvular.
+Researchers from the [Instituto de Cardiología y Cirugía Cardiovascular de La Habana (Cuba)](http://scielo.sld.cu/scielo.php?script=sci_arttext&pid=S0034-74932008000400005) did a study on 1264 patients from which 21% of them presented a coronary preoperative intervention. Given the results, they concluded that this is one of the main risk factors that lead to postoperative and transoperative complications. Based on this, we decided to analyze the amount of  patients that had some kind of complication according to their previous clinical intervention. It resulted in 16 patients presenting complications: 4 were intervened by angioplasty previously, 1 by CRM and 11 by valvular.
 
 
 ```{r, intervencionPreviaConComplicaciones, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
@@ -140,7 +142,7 @@ plot_ly(alpha = 1, color=factor(intervencionPreviaConComplicaciones$'INTERVENCIO
   
 ```
 
-Another aspect that was analysed was the type of procedure done to each patient considering the type of diseases they suffer. Under the circumstances given in the dataset, it was designed a graph with the following results:
+Another aspect that was analyzed was the type of procedure done to each patient considering the type of diseases they suffer. Under the circumstances given in the dataset, it was designed a graph with the following results:
 
 ```{r, 3graficos, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -187,17 +189,17 @@ ggplot(data, aes(fill=Procedimientos, y=ejeY, x=ejeX)) +
 
 ```
 
-Diabetics are intervened mostly by angioplasty, although there is a significant number of surgeries, due to the fact that nowadays revascularization surgeries are becoming more common in this type of patients as a consequence of the number of complications in long term that angioplastic patients suffer.
+Diabetics are intervened [mostly by angioplasty](http://www.scielo.org.mx/scielo.php?script=sci_abstract&pid=S0188-21982018000100004&lng=es&nrm=iso&tlng=es), although there is a significant number of surgeries, due to the fact that nowadays revascularization surgeries are becoming more common in this type of patients as a consequence of the number of complications in long term that angioplasty patients suffer.
 In hypertension cases there is a particularity: they are all intervened through surgery. A study from the Journal of the American College of Cardiology concluded that from 20 patients submitted by angioplasty a 20% suffered from aneurysm while the rest of the patients (16) that went to surgery did not have it. As these types of complications are commonly found in hypertense patients, angioplasty is chosen in order to reduce risks.
 Obese people most frequent procedure is as well surgery, even though that, in contrast with diabetes and hypertension, it is more balanced the use of the different procedures.
 
 
 Number of injuries
 
-In the medical field it is well known that as people grow older, the heart tends to enlarge slightly. Consequently, it develops thicker walls and the cavities enlarge as well. This increase  is mainly caused by an increase of size of the cardiac muscle cells. Due to it, we decided to evaluate if there is any correlation between the number of injuries in patients older than 70 years old.
-After analyzing the data accordingly it was found that male patients did increase their number of injuries when they became older.  This can be seen in the graphs by comparing the amount of percentage of an amount of lesions between each graph.
+In the medical field it is well known that as people grow older, the heart tends to enlarge slightly. Consequently, it develops thicker walls and the cavities enlarge as well. This increase is mainly caused by an increase of size of the cardiac muscle cells. Due to it, we decided to evaluate if there is any correlation between the number of injuries in patients older than 70 years old.
+After analyzing the data accordingly it was found that male patients did increase their number of injuries when they became older. This can be seen in the graphs by comparing the amount of percentage of an amount of lesions between each graph.
 
-
+<div style="display:flex">
 ```{r, CantDeLesiones, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
 ####MAYORES A 70 HOMBRES
 
@@ -290,18 +292,18 @@ hmenoresA70paraHombres <- datamenoresA70paraHombres %>%
 hmenoresA70paraHombres
 
 ```
-
+</div>
 
 Surgery with Myocardial revascularization surgery
 
-Coronary revascularization surgery by bypass is the most frequent surgery in patients with cardiovascular history thanks to its low cost and high effectiveness. This explains why from all the patients from the dataset that went to surgery, around a 72% of them went to coronary revascularization surgery 
+Coronary revascularization surgery by bypass is the most frequent surgery in patients with cardiovascular history thanks to its [low cost and high effectiveness.](http://scielo.sld.cu/scielo.php?script=sci_arttext&pid=S0034-74932011000100002). This explains why from all the patients from the dataset that went to surgery, around a 72% of them went to coronary revascularization surgery.
 
 
 ```{r, CIRUGIAConCRM, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
 ##De los pacientes que fueron a cirugía, cuántos fueron sometidos a una cirugía de revascularización coronaria (CRM)?
 
 fueronACIRUGIA<- dataset[!is.na(dataset$`TIPO DE CIRUGIA`),c(23,25)]
-sometidosACRM <- fueronACIRUGIA[fueronACIRUGIA$CRM == "true",]
+sometidosACRM <- fueronACIRUGIA[fueronACIRUGIA$CRM == "TRUE",]
 
 options(highcharter.theme = hc_theme_smpl(tooltip = list(valueDecimals = 2)))
 total <- nrow(sometidosACRM)
@@ -332,10 +334,94 @@ hc
 
 
 
-Correlation between pre existing deseases and complications 
+Correlation between pre existing deceases and complications 
 
 The graph obtained portrays the number of patients with one or more pre existing diseases that suffer from some kind of cardiovascular complication. It can be seen that the vast majority of cases suffer from diabetes (9 patients from which 1 also suffers from hypertension), then it follows hypertension (8 patients; 1 suffers as well from diabetes and another from obesity ), and finally obesity with 2 patients, from which one also has hypertension.
 
-```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '50%'}
-  knitr::include_graphics("C:/Users/Nicolas/Desktop/R/r2/venn_diagramm.png")
+```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '50%', fig.align='center'}
+  knitr::include_graphics("C:/Users/Usuario/Desktop/RAlgo/venn_diagramm.png")
+```
+
+# Predictor {#predictor .tabset}
+
+The final section of this report will be specifically to the prediction of events concerning the types of procedures presented in the dataset.
+
+After generating our prediction model, we tested it using the data of 113 patients. The model predicted successfully 92 out of the total 113 with a success rate of approximately 81,4%. We used this model because there is only a 7% of error for a false positive on surgery, which we think is the most critical way of failing the prediction, even though this means that the error of a false positive on angioplasty is going to be higher. This prevents patients from having a surgery, when they are required to have an angioplasty.
+
+
+
+```{r, predictorCode, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
+
+library(caret)
+library(vcdExtra)
+library(randomForest)
+library(ROCR)
+library(readxl)
+
+dataset <- read_excel("C:/Users/Usuario/Desktop/Timo Facu/Segundo año/1er Cutri/AyED R/dataset.xlsx")
+dataset$SEXO <- factor(dataset$SEXO, levels=c("MASC", "FEME"), labels=c("M","F"))
+dataset<- dataset[which(dataset$PROCEDIMIENTO=="ANGIOPLASTIA" | dataset$PROCEDIMIENTO=="CIRUGIA"),]
+dataset$HIPERTENSION<- ifelse(dataset$`TAS INGRESO RCV` >= 140 | dataset$`TAD INGRESO RCV` >= 90,1,0)
+dataset$HIPERTENSION<- ifelse(is.na(dataset$HIPERTENSION) | dataset$HIPERTENSION==0,0,1)
+
+
+EDADES<- case_when(c(dataset$EDAD <75)~'joven',c(dataset$EDAD >=75)~'viejo' )
+
+numeroDeLesiones<- ifelse(dataset$`NUMERO DE LESIONES`>=3,"YES","NO")
+numeroDeLesiones<- ifelse(is.na(numeroDeLesiones)| numeroDeLesiones=="NO","NO","YES")
+datasetPrediction<- data.frame(dataset$DIABETES, dataset$HIPERTENSION,
+                               dataset$`ANATOMIA CORONARIA COMPLEJA`,
+                               numeroDeLesiones, dataset$SEXO,
+                               dataset$PROCEDIMIENTO,
+                               dataset$BETABLOQ,
+                               EDADES, dataset$P2Y12,dataset$AAS,
+                               dataset$AMIODARONA,dataset$LVCX,
+                               dataset$CD,
+                               stringsAsFactors = TRUE)
+
+
+colnames(datasetPrediction)<-c("DIABETES", "HIPERTENSION", 
+                               "ANATOMIA CORONARIA COMPLEJA", "MAS DE 2 LESIONES",
+                               "SEXO","PROCEDIMIENTO","BETA","EDAD","p2y2","AAS",
+                                "AMIO","LVCX","CD")
+
+index<- createDataPartition(datasetPrediction$PROCEDIMIENTO, p = 0.7, list = F)
+
+modelForest <- randomForest(x= datasetPrediction[index, colnames(datasetPrediction) != "PROCEDIMIENTO"],
+                            y= datasetPrediction[index, "PROCEDIMIENTO"],
+                            ntree = 1000)
+
+
+predF <- predict(modelForest, datasetPrediction[-index,], type = "class")
+
+#confusionMatrix(predF,datasetPrediction[-index,"PROCEDIMIENTO"])
+
+knitr::include_graphics("C:/Users/Usuario/Desktop/RAlgo/Tabla.png")
+
+```
+
+AUROC Curve
+
+The AUROC curve represents the ratios between true angioplastied patients and false angioplastied patients. With this curve we can confirm that there is a high ratio of true angioplastied patients.
+
+```{r, curvaAUC, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
+
+
+plotROC <- function(pred){
+  perf<- performance(pred,"tpr","fpr")
+  plot(perf)
+  AUC<-performance(pred,"auc")@y.values[[1]]
+  grid()
+  text(.6,.2,sprintf("AUC=%0.3f", AUC))
+  abline(0,1,col="red", lty = 2)
+}
+
+predaux<-prediction(as.numeric(predF),datasetPrediction[-index,"PROCEDIMIENTO"])
+
+perf <- performance(predaux, "auc")
+#perf@y.values[[1]]
+
+plotROC(predaux)
+
+
 ```
