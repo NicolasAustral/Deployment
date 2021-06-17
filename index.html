@@ -1,138 +1,436 @@
----
-title: 'Investigation and study of factors regarding coronary problems'
-author: "Lautaro Orlando, Pablo Villani, Juan Pablo Senmartin, Timoteo Sanchez, Nicolas Gamboa"
-date: '2021-06-08'
-output:
-  html_document: 
-    highlight: textmate
-    keep_md: yes
-    number_sections: yes
-    self_contained: no
-    theme: yeti
-    toc: true
-    toc_depth: 3 # profundidad de tabla de contenidos
-    toc_float: true
----
+<!DOCTYPE html>
 
-# Introduction {#Intro .tabset}
+<html>
 
-The cardiologic service of Austral Hospital has given us a dataset that counts with 345 patients that suffer from some kind of coronary dysfunction.  In order to develop an accurate analysis and prediction according to the requirements entrusted to fulfill, we started searching papers and articles written by specialists on the subject so that we could get in sintony with the language used in the dataset. Once we acquired a certain level of knowledge, we lead off with the analysis and development of queries with the purpose of creating links between the different types of data inside the dataset, and portray this information on graphs.
+<head>
 
-# Data Analysis {#DataAn .tabset}
-In this section of the report, it is going to be shown some of  the queries designed and the analysis making special focus on the impact of most of the factors concerning coronary issues.
-
-Gender 
-
-According to the [National Heart, Lung and Blood Institute](https://www.nhlbi.nih.gov/health-topics/coronary-heart-disease), the risk of suffering some kind of coronary complication in men starts to increase at the age of 45, while in women this trend appears at the age of 55. This is because, after the menopause, womens production of estrogen, a hormone that modulates the vascular function, decreases considerably. Besides, as people get older, the arteries and vessels become narrower. As it can be seen in the graphs, the most common reason of admission in both, men over the age of 45 and women  over the age of 55, is PROG CORONARIO (206 male patients and 27 female patients)
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Lautaro Orlando, Pablo Villani, Juan Pablo Senmartin, Timoteo Sanchez, Nicolas Gamboa" />
+
+<meta name="date" content="2021-06-08" />
+
+<title>Investigation and study of factors regarding coronary problems</title>
+
+<script src="index_files/header-attrs-2.8/header-attrs.js"></script>
+<script src="index_files/jquery-3.5.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="index_files/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="index_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="index_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="index_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="index_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="index_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="index_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="index_files/navigation-1.1/tabsets.js"></script>
+<link href="index_files/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="index_files/highlightjs-9.12.0/highlight.js"></script>
+<script src="index_files/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="index_files/plotly-binding-4.9.3/plotly.js"></script>
+<script src="index_files/typedarray-0.1/typedarray.min.js"></script>
+<link href="index_files/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="index_files/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="index_files/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="index_files/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<script src="index_files/proj4js-2.3.15/proj4.js"></script>
+<link href="index_files/highcharts-8.1.2/css/motion.css" rel="stylesheet" />
+<script src="index_files/highcharts-8.1.2/highcharts.js"></script>
+<script src="index_files/highcharts-8.1.2/highcharts-3d.js"></script>
+<script src="index_files/highcharts-8.1.2/highcharts-more.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/stock.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/map.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/annotations.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/data.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/drilldown.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/item-series.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/offline-exporting.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/overlapping-datalabels.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/exporting.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/export-data.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/funnel.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/heatmap.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/treemap.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/sankey.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/dependency-wheel.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/organization.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/solid-gauge.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/streamgraph.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/sunburst.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/vector.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/wordcloud.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/xrange.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/tilemap.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/venn.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/gantt.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/timeline.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/parallel-coordinates.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/bullet.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/coloraxis.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/dumbbell.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/lollipop.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/series-label.js"></script>
+<script src="index_files/highcharts-8.1.2/plugins/motion.js"></script>
+<script src="index_files/highcharts-8.1.2/custom/reset.js"></script>
+<script src="index_files/highcharts-8.1.2/modules/boost.js"></script>
+<script src="index_files/highchart-binding-0.8.2/highchart.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
 
 
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Investigation and study of factors regarding coronary problems</h1>
+<h4 class="author">Lautaro Orlando, Pablo Villani, Juan Pablo Senmartin, Timoteo Sanchez, Nicolas Gamboa</h4>
+<h4 class="date">2021-06-08</h4>
+
+</div>
+
+
+<div id="Intro" class="section level1 tabset" number="1">
+<h1 class="tabset" number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>The cardiologic service of Austral Hospital has given us a dataset that counts with 345 patients that suffer from some kind of coronary dysfunction. In order to develop an accurate analysis and prediction according to the requirements entrusted to fulfill, we started searching papers and articles written by specialists on the subject so that we could get in sintony with the language used in the dataset. Once we acquired a certain level of knowledge, we lead off with the analysis and development of queries with the purpose of creating links between the different types of data inside the dataset, and portray this information on graphs.</p>
+</div>
+<div id="DataAn" class="section level1 tabset" number="2">
+<h1 class="tabset" number="2"><span class="header-section-number">2</span> Data Analysis</h1>
+<p>In this section of the report, it is going to be shown some of the queries designed and the analysis making special focus on the impact of most of the factors concerning coronary issues.</p>
+<p>Gender</p>
+<p>According to the <a href="https://www.nhlbi.nih.gov/health-topics/coronary-heart-disease">National Heart, Lung and Blood Institute</a>, the risk of suffering some kind of coronary complication in men starts to increase at the age of 45, while in women this trend appears at the age of 55. This is because, after the menopause, womens production of estrogen, a hormone that modulates the vascular function, decreases considerably. Besides, as people get older, the arteries and vessels become narrower. As it can be seen in the graphs, the most common reason of admission in both, men over the age of 45 and women over the age of 55, is PROG CORONARIO (206 male patients and 27 female patients)</p>
 <div style="display:flex">
-
-```{=html}
 <div id="htmlwidget-2cf5fb5ffb25e95cf19f" style="width:672px;height:480px;" class="plotly html-widget"></div>
 <script type="application/json" data-for="htmlwidget-2cf5fb5ffb25e95cf19f">{"x":{"visdat":{"f286b1b4edf":["function () ","plotlyVisDat"],"f2869845ff0":["function () ","data"]},"cur_data":"f2869845ff0","attrs":{"f2869845ff0":{"color":["SCA no SST","PROG VALV","SCA no SST","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","OTRA","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","MIXOMA Y OTROS TUMORES","PROG VALV","HTPULMONAR","PROG VALV","PROG CORONARIO","PROG VALV","PROG VALV","ANEURISMA AO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","SCA SST","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","SINCOPE","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","INSUFICIENCIA CARDIACA","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","INSUFICIENCIA CARDIACA","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","OTRA","ANEURISMA AO","PROG CORONARIO","PROG CORONARIO","OTRA","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","INSUFICIENCIA CARDIACA","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","INSUFICIENCIA CARDIACA","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","INSUFICIENCIA CARDIACA","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","INSUFICIENCIA CARDIACA","PROG CORONARIO","PROGRAMADO TAVI","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","ANEURISMA AO","PROG VALV","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","ANEURISMA AO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","OTRA","PROG CORONARIO","SCA no SST","PROG CORONARIO","SINCOPE","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","SCA no SST","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","SCA no SST","PROGRAMADO TAVI","PROG VALV","PROG CORONARIO","PROG VALV","ANEURISMA AO","SCA no SST","SCA no SST","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","ANEURISMA AO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROGRAMADO TAVI","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","SCA no SST"],"colors":["#58FAD0","#01DF74","#088A68","#01DFA5","#0B614B","#0B2F3A","#086A87","#01A9DB","#2ECCFA","#A9BCF5","#0080FF"],"alpha":1,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":["SCA no SST","PROG VALV","SCA no SST","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","OTRA","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","MIXOMA Y OTROS TUMORES","PROG VALV","HTPULMONAR","PROG VALV","PROG CORONARIO","PROG VALV","PROG VALV","ANEURISMA AO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","SCA SST","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","SINCOPE","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","INSUFICIENCIA CARDIACA","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","INSUFICIENCIA CARDIACA","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","OTRA","ANEURISMA AO","PROG CORONARIO","PROG CORONARIO","OTRA","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","INSUFICIENCIA CARDIACA","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","INSUFICIENCIA CARDIACA","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","INSUFICIENCIA CARDIACA","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","INSUFICIENCIA CARDIACA","PROG CORONARIO","PROGRAMADO TAVI","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","ANEURISMA AO","PROG VALV","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","ANEURISMA AO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","OTRA","PROG CORONARIO","SCA no SST","PROG CORONARIO","SINCOPE","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","SCA no SST","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","SCA no SST","PROGRAMADO TAVI","PROG VALV","PROG CORONARIO","PROG VALV","ANEURISMA AO","SCA no SST","SCA no SST","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","ANEURISMA AO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROGRAMADO TAVI","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","SCA no SST"],"type":"histogram","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"overlay","showlegend":false,"title":{"text":"Reasons for admission for men over 45 years of age"},"xaxis":{"domain":[0,1],"automargin":true,"title":"Reasons for admission","type":"category","categoryorder":"array","categoryarray":["ANEURISMA AO","HTPULMONAR","INSUFICIENCIA CARDIACA","MIXOMA Y OTROS TUMORES","OTRA","PROG CORONARIO","PROG VALV","PROGRAMADO TAVI","SCA no SST","SCA SST","SINCOPE"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Amount of people","dtick":40},"hovermode":"closest"},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["ANEURISMA AO","ANEURISMA AO","ANEURISMA AO","ANEURISMA AO","ANEURISMA AO","ANEURISMA AO"],"type":"histogram","name":"ANEURISMA AO","marker":{"color":"rgba(88,250,208,1)","line":{"color":"rgba(88,250,208,1)"}},"error_y":{"color":"rgba(88,250,208,1)"},"error_x":{"color":"rgba(88,250,208,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["HTPULMONAR"],"type":"histogram","name":"HTPULMONAR","marker":{"color":"rgba(1,223,116,1)","line":{"color":"rgba(1,223,116,1)"}},"error_y":{"color":"rgba(1,223,116,1)"},"error_x":{"color":"rgba(1,223,116,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["INSUFICIENCIA CARDIACA","INSUFICIENCIA CARDIACA","INSUFICIENCIA CARDIACA","INSUFICIENCIA CARDIACA","INSUFICIENCIA CARDIACA","INSUFICIENCIA CARDIACA"],"type":"histogram","name":"INSUFICIENCIA CARDIACA","marker":{"color":"rgba(8,138,104,1)","line":{"color":"rgba(8,138,104,1)"}},"error_y":{"color":"rgba(8,138,104,1)"},"error_x":{"color":"rgba(8,138,104,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["MIXOMA Y OTROS TUMORES"],"type":"histogram","name":"MIXOMA Y OTROS TUMORES","marker":{"color":"rgba(1,223,165,1)","line":{"color":"rgba(1,223,165,1)"}},"error_y":{"color":"rgba(1,223,165,1)"},"error_x":{"color":"rgba(1,223,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["OTRA","OTRA","OTRA","OTRA"],"type":"histogram","name":"OTRA","marker":{"color":"rgba(11,97,75,1)","line":{"color":"rgba(11,97,75,1)"}},"error_y":{"color":"rgba(11,97,75,1)"},"error_x":{"color":"rgba(11,97,75,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO"],"type":"histogram","name":"PROG CORONARIO","marker":{"color":"rgba(11,47,58,1)","line":{"color":"rgba(11,47,58,1)"}},"error_y":{"color":"rgba(11,47,58,1)"},"error_x":{"color":"rgba(11,47,58,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV"],"type":"histogram","name":"PROG VALV","marker":{"color":"rgba(8,106,135,1)","line":{"color":"rgba(8,106,135,1)"}},"error_y":{"color":"rgba(8,106,135,1)"},"error_x":{"color":"rgba(8,106,135,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["PROGRAMADO TAVI","PROGRAMADO TAVI","PROGRAMADO TAVI"],"type":"histogram","name":"PROGRAMADO TAVI","marker":{"color":"rgba(1,169,219,1)","line":{"color":"rgba(1,169,219,1)"}},"error_y":{"color":"rgba(1,169,219,1)"},"error_x":{"color":"rgba(1,169,219,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["SCA no SST","SCA no SST","SCA no SST","SCA no SST","SCA no SST","SCA no SST","SCA no SST","SCA no SST"],"type":"histogram","name":"SCA no SST","marker":{"color":"rgba(46,204,250,1)","line":{"color":"rgba(46,204,250,1)"}},"error_y":{"color":"rgba(46,204,250,1)"},"error_x":{"color":"rgba(46,204,250,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["SCA SST"],"type":"histogram","name":"SCA SST","marker":{"color":"rgba(169,188,245,1)","line":{"color":"rgba(169,188,245,1)"}},"error_y":{"color":"rgba(169,188,245,1)"},"error_x":{"color":"rgba(169,188,245,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["SINCOPE","SINCOPE"],"type":"histogram","name":"SINCOPE","marker":{"color":"rgba(0,128,255,1)","line":{"color":"rgba(0,128,255,1)"}},"error_y":{"color":"rgba(0,128,255,1)"},"error_x":{"color":"rgba(0,128,255,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
-```
-
-```{=html}
 <div id="htmlwidget-ebd535129eb7fbed042d" style="width:672px;height:480px;" class="plotly html-widget"></div>
 <script type="application/json" data-for="htmlwidget-ebd535129eb7fbed042d">{"x":{"visdat":{"f286ca767c":["function () ","plotlyVisDat"],"f281a32461":["function () ","data"]},"cur_data":"f281a32461","attrs":{"f281a32461":{"color":["PROG CORONARIO","PROG VALV","ANEURISMA AO","PROG VALV","PROG VALV","PROG VALV","PROG CORONARIO","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","SCA no SST","SCA no SST","PROG VALV","PROG VALV","PROGRAMADO TAVI","PROG CORONARIO","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","OTRA","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROGRAMADO TAVI","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","HTPULMONAR","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG VALV","PROG CORONARIO","PROG VALV","PROG VALV"],"colors":["#58FAD0","#01DF74","#0B614B","#0B2F3A","#086A87","#01A9DB","#2ECCFA"],"alpha":1,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":["PROG CORONARIO","PROG VALV","ANEURISMA AO","PROG VALV","PROG VALV","PROG VALV","PROG CORONARIO","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","SCA no SST","SCA no SST","PROG VALV","PROG VALV","PROGRAMADO TAVI","PROG CORONARIO","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","OTRA","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROGRAMADO TAVI","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","HTPULMONAR","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG CORONARIO","PROG CORONARIO","PROG VALV","PROG VALV","PROG VALV","PROG CORONARIO","PROG VALV","PROG VALV"],"type":"histogram","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"overlay","showlegend":false,"title":"Reasons for admission for women over 55 years of age","xaxis":{"domain":[0,1],"automargin":true,"title":"Reasons for admission","type":"category","categoryorder":"array","categoryarray":["ANEURISMA AO","HTPULMONAR","OTRA","PROG CORONARIO","PROG VALV","PROGRAMADO TAVI","SCA no SST"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Amount of people"},"hovermode":"closest"},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["ANEURISMA AO"],"type":"histogram","name":"ANEURISMA AO","marker":{"color":"rgba(88,250,208,1)","line":{"color":"rgba(88,250,208,1)"}},"error_y":{"color":"rgba(88,250,208,1)"},"error_x":{"color":"rgba(88,250,208,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["HTPULMONAR"],"type":"histogram","name":"HTPULMONAR","marker":{"color":"rgba(1,223,116,1)","line":{"color":"rgba(1,223,116,1)"}},"error_y":{"color":"rgba(1,223,116,1)"},"error_x":{"color":"rgba(1,223,116,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["OTRA"],"type":"histogram","name":"OTRA","marker":{"color":"rgba(11,97,75,1)","line":{"color":"rgba(11,97,75,1)"}},"error_y":{"color":"rgba(11,97,75,1)"},"error_x":{"color":"rgba(11,97,75,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO","PROG CORONARIO"],"type":"histogram","name":"PROG CORONARIO","marker":{"color":"rgba(11,47,58,1)","line":{"color":"rgba(11,47,58,1)"}},"error_y":{"color":"rgba(11,47,58,1)"},"error_x":{"color":"rgba(11,47,58,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV","PROG VALV"],"type":"histogram","name":"PROG VALV","marker":{"color":"rgba(8,106,135,1)","line":{"color":"rgba(8,106,135,1)"}},"error_y":{"color":"rgba(8,106,135,1)"},"error_x":{"color":"rgba(8,106,135,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["PROGRAMADO TAVI","PROGRAMADO TAVI"],"type":"histogram","name":"PROGRAMADO TAVI","marker":{"color":"rgba(1,169,219,1)","line":{"color":"rgba(1,169,219,1)"}},"error_y":{"color":"rgba(1,169,219,1)"},"error_x":{"color":"rgba(1,169,219,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["SCA no SST","SCA no SST"],"type":"histogram","name":"SCA no SST","marker":{"color":"rgba(46,204,250,1)","line":{"color":"rgba(46,204,250,1)"}},"error_y":{"color":"rgba(46,204,250,1)"},"error_x":{"color":"rgba(46,204,250,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
-```
-</div> 
-
-FEY 
-
-The [FEY](https://www.heart.org/en/health-topics/heart-failure/diagnosing-heart-failure/ejection-fraction-heart-failure-measurement) is a measurement expressed as a percentage of the amount of blood pushed out by the left ventricle with every heartbeat. The American Heart Association informs that a normal level of FEY is between 50 and 70. If the person has a fey under 50 and above 40 it's on the borderline, which does not necessarily mean that the person is suffering from a heart dysfunction. However, the critical values are found under 40 (that is considered too low and a potential patient with cardiomyopathy) and over 70 (very high level, possibly the person suffers hypertrophic cardiomyopathy).  Under the data given in the dataset, it can be seen that the mean of FEY equals to 57.14, which means that most of the patients included in the dataset have a normal level of FEY.
-
-
-
-
-![](index_files/figure-html/mediaFey-1.png)<!-- -->
-
-Angioplastied arteries
-
-The [“Revista Argentina de Cardiología"](https://www.redalyc.org/pdf/3053/305326932005.pdf) has analyzed over 623 patients, with an average age of 62 years old,  in order to study the different damaged arteries that were angioplastied. According to their report, the most common arteries were: anterior descending artery or DA (49.3 %) , right coronary or CD (31.1 %), proximal circumflex or CX PROXIMAL (22.4 %) and lateral ventricle or LVX (5.1 %). Taking into consideration this study, we decided to do the same thing in our dataset but in a range of patients with an age between 50 and 70 years old. As it can be seen in the graph below, the cases found in our dataset follow the same logic from the study previously mentioned. 
-
-![](index_files/figure-html/vasos-1.png)<!-- -->
-
-
-# Interpretaton {#interpretation .tabset}
-
-This section of the report is specifically oriented to the interrelation of information belonging to the dataset and, under the grounds of the results achieved from the graphs, deduce and conclude certain aspects
-
-Previous intervention with complications
-
-Researchers from the [Instituto de Cardiología y Cirugía Cardiovascular de La Habana (Cuba)](http://scielo.sld.cu/scielo.php?script=sci_arttext&pid=S0034-74932008000400005) did a study on 1264 patients from which 21% of them presented a coronary preoperative intervention. Given the results, they concluded that this is one of the main risk factors that lead to postoperative and transoperative complications. Based on this, we decided to analyze the amount of  patients that had some kind of complication according to their previous clinical intervention. It resulted in 16 patients presenting complications: 4 were intervened by angioplasty previously, 1 by CRM and 11 by valvular.
-
-
-
-```{=html}
+</div>
+<p>FEY</p>
+<p>The <a href="https://www.heart.org/en/health-topics/heart-failure/diagnosing-heart-failure/ejection-fraction-heart-failure-measurement">FEY</a> is a measurement expressed as a percentage of the amount of blood pushed out by the left ventricle with every heartbeat. The American Heart Association informs that a normal level of FEY is between 50 and 70. If the person has a fey under 50 and above 40 it’s on the borderline, which does not necessarily mean that the person is suffering from a heart dysfunction. However, the critical values are found under 40 (that is considered too low and a potential patient with cardiomyopathy) and over 70 (very high level, possibly the person suffers hypertrophic cardiomyopathy). Under the data given in the dataset, it can be seen that the mean of FEY equals to 57.14, which means that most of the patients included in the dataset have a normal level of FEY.</p>
+<p><img src="index_files/figure-html/mediaFey-1.png" /><!-- --></p>
+<p>Angioplastied arteries</p>
+<p>The <a href="https://www.redalyc.org/pdf/3053/305326932005.pdf">“Revista Argentina de Cardiología”</a> has analyzed over 623 patients, with an average age of 62 years old, in order to study the different damaged arteries that were angioplastied. According to their report, the most common arteries were: anterior descending artery or DA (49.3 %) , right coronary or CD (31.1 %), proximal circumflex or CX PROXIMAL (22.4 %) and lateral ventricle or LVX (5.1 %). Taking into consideration this study, we decided to do the same thing in our dataset but in a range of patients with an age between 50 and 70 years old. As it can be seen in the graph below, the cases found in our dataset follow the same logic from the study previously mentioned.</p>
+<p><img src="index_files/figure-html/vasos-1.png" /><!-- --></p>
+</div>
+<div id="interpretation" class="section level1 tabset" number="3">
+<h1 class="tabset" number="3"><span class="header-section-number">3</span> Interpretaton</h1>
+<p>This section of the report is specifically oriented to the interrelation of information belonging to the dataset and, under the grounds of the results achieved from the graphs, deduce and conclude certain aspects</p>
+<p>Previous intervention with complications</p>
+<p>Researchers from the <a href="http://scielo.sld.cu/scielo.php?script=sci_arttext&amp;pid=S0034-74932008000400005">Instituto de Cardiología y Cirugía Cardiovascular de La Habana (Cuba)</a> did a study on 1264 patients from which 21% of them presented a coronary preoperative intervention. Given the results, they concluded that this is one of the main risk factors that lead to postoperative and transoperative complications. Based on this, we decided to analyze the amount of patients that had some kind of complication according to their previous clinical intervention. It resulted in 16 patients presenting complications: 4 were intervened by angioplasty previously, 1 by CRM and 11 by valvular.</p>
 <div id="htmlwidget-c79be782a46803d6f272" style="width:672px;height:384px;" class="plotly html-widget"></div>
 <script type="application/json" data-for="htmlwidget-c79be782a46803d6f272">{"x":{"visdat":{"f28143f253c":["function () ","plotlyVisDat"],"f286da76f2f":["function () ","data"]},"cur_data":"f286da76f2f","attrs":{"f286da76f2f":{"texts":["a","b","c"],"hoverinfo":"texts","color":["VALVULAR","VALVULAR","VALVULAR","VALVULAR","ANGIOPLASTIA","ANGIOPLASTIA","VALVULAR","ANGIOPLASTIA","VALVULAR","ANGIOPLASTIA","VALVULAR","VALVULAR","VALVULAR","VALVULAR","CRM","VALVULAR"],"colors":["#01DFA5","#0B614B","#0B2F3A"],"alpha":1,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"x":["VALVULAR","VALVULAR","VALVULAR","VALVULAR","ANGIOPLASTIA","ANGIOPLASTIA","VALVULAR","ANGIOPLASTIA","VALVULAR","ANGIOPLASTIA","VALVULAR","VALVULAR","VALVULAR","VALVULAR","CRM","VALVULAR"],"type":"histogram","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"barmode":"overlay","showlegend":false,"title":"Complications according to the type of previous intervention","xaxis":{"domain":[0,1],"automargin":true,"title":"Types of previous interventions","type":"category","categoryorder":"array","categoryarray":["ANGIOPLASTIA","CRM","VALVULAR"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Amount of people"},"hovermode":"closest"},"source":"A","config":{"showSendToCloud":false},"data":[{"texts":["a","b","c"],"hoverinfo":["texts","texts","texts","texts"],"x":["ANGIOPLASTIA","ANGIOPLASTIA","ANGIOPLASTIA","ANGIOPLASTIA"],"type":"histogram","name":"ANGIOPLASTIA","marker":{"color":"rgba(1,223,165,1)","line":{"color":"rgba(1,223,165,1)"}},"error_y":{"color":"rgba(1,223,165,1)"},"error_x":{"color":"rgba(1,223,165,1)"},"xaxis":"x","yaxis":"y","frame":null},{"texts":["a","b","c"],"hoverinfo":"texts","x":["CRM"],"type":"histogram","name":"CRM","marker":{"color":"rgba(11,97,75,1)","line":{"color":"rgba(11,97,75,1)"}},"error_y":{"color":"rgba(11,97,75,1)"},"error_x":{"color":"rgba(11,97,75,1)"},"xaxis":"x","yaxis":"y","frame":null},{"texts":["a","b","c"],"hoverinfo":["texts","texts","texts","texts","texts","texts","texts","texts","texts","texts","texts"],"x":["VALVULAR","VALVULAR","VALVULAR","VALVULAR","VALVULAR","VALVULAR","VALVULAR","VALVULAR","VALVULAR","VALVULAR","VALVULAR"],"type":"histogram","name":"VALVULAR","marker":{"color":"rgba(11,47,58,1)","line":{"color":"rgba(11,47,58,1)"}},"error_y":{"color":"rgba(11,47,58,1)"},"error_x":{"color":"rgba(11,47,58,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
-```
-
-Another aspect that was analyzed was the type of procedure done to each patient considering the type of diseases they suffer. Under the circumstances given in the dataset, it was designed a graph with the following results:
-
-![](index_files/figure-html/3graficos-1.png)<!-- -->
-
-Diabetics are intervened [mostly by angioplasty](http://www.scielo.org.mx/scielo.php?script=sci_abstract&pid=S0188-21982018000100004&lng=es&nrm=iso&tlng=es), although there is a significant number of surgeries, due to the fact that nowadays revascularization surgeries are becoming more common in this type of patients as a consequence of the number of complications in long term that angioplasty patients suffer.
-In hypertension cases there is a particularity: they are all intervened through surgery. A study from the Journal of the American College of Cardiology concluded that from 20 patients submitted by angioplasty a 20% suffered from aneurysm while the rest of the patients (16) that went to surgery did not have it. As these types of complications are commonly found in hypertense patients, angioplasty is chosen in order to reduce risks.
-Obese people most frequent procedure is as well surgery, even though that, in contrast with diabetes and hypertension, it is more balanced the use of the different procedures.
-
-
-Number of injuries
-
-In the medical field it is well known that as people grow older, the heart tends to enlarge slightly. Consequently, it develops thicker walls and the cavities enlarge as well. This increase is mainly caused by an increase of size of the cardiac muscle cells. Due to it, we decided to evaluate if there is any correlation between the number of injuries in patients older than 70 years old.
-After analyzing the data accordingly it was found that male patients did increase their number of injuries when they became older. This can be seen in the graphs by comparing the amount of percentage of an amount of lesions between each graph.
-
+<p>Another aspect that was analyzed was the type of procedure done to each patient considering the type of diseases they suffer. Under the circumstances given in the dataset, it was designed a graph with the following results:</p>
+<p><img src="index_files/figure-html/3graficos-1.png" /><!-- --></p>
+<p>Diabetics are intervened <a href="http://www.scielo.org.mx/scielo.php?script=sci_abstract&amp;pid=S0188-21982018000100004&amp;lng=es&amp;nrm=iso&amp;tlng=es">mostly by angioplasty</a>, although there is a significant number of surgeries, due to the fact that nowadays revascularization surgeries are becoming more common in this type of patients as a consequence of the number of complications in long term that angioplasty patients suffer. In hypertension cases there is a particularity: they are all intervened through surgery. A study from the Journal of the American College of Cardiology concluded that from 20 patients submitted by angioplasty a 20% suffered from aneurysm while the rest of the patients (16) that went to surgery did not have it. As these types of complications are commonly found in hypertense patients, angioplasty is chosen in order to reduce risks. Obese people most frequent procedure is as well surgery, even though that, in contrast with diabetes and hypertension, it is more balanced the use of the different procedures.</p>
+<p>Number of injuries</p>
+<p>In the medical field it is well known that as people grow older, the heart tends to enlarge slightly. Consequently, it develops thicker walls and the cavities enlarge as well. This increase is mainly caused by an increase of size of the cardiac muscle cells. Due to it, we decided to evaluate if there is any correlation between the number of injuries in patients older than 70 years old. After analyzing the data accordingly it was found that male patients did increase their number of injuries when they became older. This can be seen in the graphs by comparing the amount of percentage of an amount of lesions between each graph.</p>
 <div style="display:flex">
-
-```{=html}
 <div id="htmlwidget-6ae76803dff62b2f19fd" style="width:100%;height:500px;" class="highchart html-widget"></div>
 <script type="application/json" data-for="htmlwidget-6ae76803dff62b2f19fd">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Amount of injuries for male patients older than 70 years old","margin":20,"align":"center","style":{"color":"#22A884","useHTML":true}},"yAxis":{"title":{"text":"y"},"type":"linear"},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"y":17.02,"name":"0 injuries"},{"y":27.66,"name":"1 injuries"},{"y":27.66,"name":"2 injuries"},{"y":20.21,"name":"3 injuries"},{"y":4.26,"name":"4 injuries"},{"y":3.19,"name":"5 injuries"}],"type":"pie","name":"Percentage of patients"}],"xAxis":{"type":"category","title":{"text":"name"},"categories":null},"colors":["#01DFA5","#0B614B","#0B2F3A","#086A87","#01A9DB","#2ECCFA"]},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
-```
-
-```{=html}
 <div id="htmlwidget-804ed8ef36e07d81bd64" style="width:100%;height:500px;" class="highchart html-widget"></div>
 <script type="application/json" data-for="htmlwidget-804ed8ef36e07d81bd64">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":"Amount of injuries for male patients younger than 70 years old","margin":20,"align":"center","style":{"color":"#22A884","useHTML":true}},"yAxis":{"title":{"text":"y"},"type":"linear"},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"y":25.53,"name":"0 injuries"},{"y":27.13,"name":"1 injuries"},{"y":27.66,"name":"2 injuries"},{"y":11.7,"name":"3 injuries"},{"y":6.91,"name":"4 injuries"},{"y":1.06,"name":"5 injuries"}],"type":"pie","name":"Percentage of patients"}],"xAxis":{"type":"category","title":{"text":"name"},"categories":null},"colors":["#01DFA5","#0B614B","#0B2F3A","#086A87","#01A9DB","#2ECCFA"]},"theme":{"chart":{"backgroundColor":"transparent"},"colors":["#7cb5ec","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1"]},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":[],"debug":false},"evals":[],"jsHooks":[]}</script>
-```
 </div>
-
-Surgery with Myocardial revascularization surgery
-
-Coronary revascularization surgery by bypass is the most frequent surgery in patients with cardiovascular history thanks to its [low cost and high effectiveness.](http://scielo.sld.cu/scielo.php?script=sci_arttext&pid=S0034-74932011000100002). This explains why from all the patients from the dataset that went to surgery, around a 72% of them went to coronary revascularization surgery.
-
-
-
-```{=html}
+<p>Surgery with Myocardial revascularization surgery</p>
+<p>Coronary revascularization surgery by bypass is the most frequent surgery in patients with cardiovascular history thanks to its <a href="http://scielo.sld.cu/scielo.php?script=sci_arttext&amp;pid=S0034-74932011000100002">low cost and high effectiveness.</a>. This explains why from all the patients from the dataset that went to surgery, around a 72% of them went to coronary revascularization surgery.</p>
 <div id="htmlwidget-36c4e37a7fe1459168b7" style="width:100%;height:500px;" class="highchart html-widget"></div>
 <script type="application/json" data-for="htmlwidget-36c4e37a7fe1459168b7">{"x":{"hc_opts":{"chart":{"reflow":true},"title":{"text":null},"yAxis":{"title":{"text":"y"},"type":"linear"},"credits":{"enabled":false},"exporting":{"enabled":false},"boost":{"enabled":false},"plotOptions":{"series":{"label":{"enabled":false},"turboThreshold":0,"showInLegend":false},"treemap":{"layoutAlgorithm":"squarified"},"scatter":{"marker":{"symbol":"circle"}}},"series":[{"group":"group","data":[{"y":3.38983050847458,"name":"ANEURISMA AORTICO"},{"y":72.8813559322034,"name":"CRM PURA"},{"y":5.08474576271186,"name":"OTRA"},{"y":1.69491525423729,"name":"PLASTICA MITRAL"},{"y":11.864406779661,"name":"RVAO"},{"y":3.38983050847458,"name":"RVAo + Aorta"},{"y":1.69491525423729,"name":"RVM"}],"type":"pie","name":"subjected to CRM"}],"xAxis":{"type":"category","title":{"text":"name"},"categories":null},"colors":["#01DFA5","#0B614B","#0B2F3A","#086A87","#01A9DB","#2ECCFA","#0080FF"]},"theme":{"colors":["#d35400","#2980b9","#2ecc71","#f1c40f","#2c3e50","#7f8c8d"],"chart":{"style":{"fontFamily":"Roboto","color":"#666666"}},"title":{"align":"left","style":{"fontFamily":"Roboto Condensed","fontWeight":"bold"}},"subtitle":{"align":"left","style":{"fontFamily":"Roboto Condensed"}},"legend":{"align":"right","verticalAlign":"bottom"},"xAxis":{"gridLineWidth":1,"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"yAxis":{"gridLineColor":"#F3F3F3","lineColor":"#F3F3F3","minorGridLineColor":"#F3F3F3","tickColor":"#F3F3F3","tickWidth":1},"plotOptions":{"line":{"marker":{"enabled":false}},"spline":{"marker":{"enabled":false}},"area":{"marker":{"enabled":false}},"areaspline":{"marker":{"enabled":false}},"arearange":{"marker":{"enabled":false}},"bubble":{"maxSize":"10%"}},"tooltip":{"valueDecimals":2}},"conf_opts":{"global":{"Date":null,"VMLRadialGradientURL":"http =//code.highcharts.com/list(version)/gfx/vml-radial-gradient.png","canvasToolsURL":"http =//code.highcharts.com/list(version)/modules/canvas-tools.js","getTimezoneOffset":null,"timezoneOffset":0,"useUTC":true},"lang":{"contextButtonTitle":"Chart context menu","decimalPoint":".","downloadJPEG":"Download JPEG image","downloadPDF":"Download PDF document","downloadPNG":"Download PNG image","downloadSVG":"Download SVG vector image","drillUpText":"Back to {series.name}","invalidDate":null,"loading":"Loading...","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"noData":"No data to display","numericSymbols":["k","M","G","T","P","E"],"printChart":"Print chart","resetZoom":"Reset zoom","resetZoomTitle":"Reset zoom level 1:1","shortMonths":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"thousandsSep":" ","weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}},"type":"chart","fonts":["Roboto","Roboto+Condensed"],"debug":false},"evals":[],"jsHooks":[]}</script>
-```
-
-
-
-Correlation between pre existing deceases and complications 
-
-The graph obtained portrays the number of patients with one or more pre existing diseases that suffer from some kind of cardiovascular complication. It can be seen that the vast majority of cases suffer from diabetes (9 patients from which 1 also suffers from hypertension), then it follows hypertension (8 patients; 1 suffers as well from diabetes and another from obesity ), and finally obesity with 2 patients, from which one also has hypertension.
-
+<p>Correlation between pre existing deceases and complications</p>
+<p>The graph obtained portrays the number of patients with one or more pre existing diseases that suffer from some kind of cardiovascular complication. It can be seen that the vast majority of cases suffer from diabetes (9 patients from which 1 also suffers from hypertension), then it follows hypertension (8 patients; 1 suffers as well from diabetes and another from obesity ), and finally obesity with 2 patients, from which one also has hypertension.</p>
 <div class="figure" style="text-align: center">
-<img src="C:/Users/Usuario/Desktop/Deployment/Deployment/venn_diagramm.png" alt="A caption" width="50%" />
-<p class="caption">A caption</p>
+<img src="venn_diagramm.png" alt="A caption" width="50%" />
+<p class="caption">
+A caption
+</p>
+</div>
+</div>
+<div id="predictor" class="section level1 tabset" number="4">
+<h1 class="tabset" number="4"><span class="header-section-number">4</span> Predictor</h1>
+<p>The final section of this report will be specifically to the prediction of events concerning the types of procedures presented in the dataset.</p>
+<p>After generating our prediction model, we tested it using the data of 113 patients. The model predicted successfully 92 out of the total 113 with a success rate of approximately 81,4%. We used this model because there is only a 7% of error for a false positive on surgery, which we think is the most critical way of failing the prediction, even though this means that the error of a false positive on angioplasty is going to be higher. This prevents patients from having a surgery, when they are required to have an angioplasty.</p>
+<p><img src="Tabla.png" /><!-- --></p>
+<p>AUROC Curve</p>
+<p>The AUROC curve represents the ratios between true angioplastied patients and false angioplastied patients. With this curve we can confirm that there is a high ratio of true angioplastied patients.</p>
+<p><img src="index_files/figure-html/curvaAUC-1.png" /><!-- --></p>
 </div>
 
-# Predictor {#predictor .tabset}
-
-The final section of this report will be specifically to the prediction of events concerning the types of procedures presented in the dataset.
-
-After generating our prediction model, we tested it using the data of 113 patients. The model predicted successfully 92 out of the total 113 with a success rate of approximately 81,4%. We used this model because there is only a 7% of error for a false positive on surgery, which we think is the most critical way of failing the prediction, even though this means that the error of a false positive on angioplasty is going to be higher. This prevents patients from having a surgery, when they are required to have an angioplasty.
 
 
+</div>
+</div>
 
-![](C:/Users/Usuario/Desktop/Deployment/Deployment/Tabla.png)<!-- -->
+</div>
 
-AUROC Curve
+<script>
 
-The AUROC curve represents the ratios between true angioplastied patients and false angioplastied patients. With this curve we can confirm that there is a high ratio of true angioplastied patients.
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
 
-![](index_files/figure-html/curvaAUC-1.png)<!-- -->
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

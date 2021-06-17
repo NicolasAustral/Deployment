@@ -339,7 +339,7 @@ Correlation between pre existing deceases and complications
 The graph obtained portrays the number of patients with one or more pre existing diseases that suffer from some kind of cardiovascular complication. It can be seen that the vast majority of cases suffer from diabetes (9 patients from which 1 also suffers from hypertension), then it follows hypertension (8 patients; 1 suffers as well from diabetes and another from obesity ), and finally obesity with 2 patients, from which one also has hypertension.
 
 ```{r pressure, echo=FALSE, fig.cap="A caption", out.width = '50%', fig.align='center'}
-  knitr::include_graphics("C:/Users/Usuario/Desktop/RAlgo/venn_diagramm.png")
+  knitr::include_graphics("C:/Users/Usuario/Desktop/Deployment/Deployment/venn_diagramm.png")
 ```
 
 # Predictor {#predictor .tabset}
@@ -350,7 +350,7 @@ After generating our prediction model, we tested it using the data of 113 patien
 
 
 
-```{r, predictorCode, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, predictorCode, fig.height=4, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center'}
 
 library(caret)
 library(vcdExtra)
@@ -396,7 +396,7 @@ predF <- predict(modelForest, datasetPrediction[-index,], type = "class")
 
 #confusionMatrix(predF,datasetPrediction[-index,"PROCEDIMIENTO"])
 
-knitr::include_graphics("C:/Users/Usuario/Desktop/RAlgo/Tabla.png")
+knitr::include_graphics("C:/Users/Usuario/Desktop/Deployment/Deployment/Tabla.png")
 
 ```
 
