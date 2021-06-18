@@ -351,7 +351,22 @@ p{
 </div>
 <div id="predictor" class="section level1 tabset" number="4">
 <h1 class="tabset" number="4"><span class="header-section-number">4</span> Predictor</h1>
-<p>The final section of this report will be specifically to the prediction of events concerning the types of procedures presented in the dataset.</p>
+<p>The final section of this report will be specifically to the prediction of events concerning the types of procedures presented in the dataset.
+      We generated our prediction model using the following variables: </p>
+<ul>
+		<li>Sex</li>
+		<li>Over 75 years old</li>
+		<li>Diabetes</li>
+		<li>Hypertension</li>
+		<li>Complex coronary anatomy</li>
+		<li>More than 2 injuries</li>
+		<li>Use of betablockers</li>
+		<li>Use of P2Y12</li>
+		<li>Use of AAS</li>
+		<li>Use of amiodarone</li>
+		<li>Injured LVCX artery</li>
+		<li>Injured CD artery</li>
+</ul>
 <p>After generating our prediction model, we tested it using the data of 113 patients. The model predicted successfully 92 out of the total 113 with a success rate of approximately 81,4%. We used this model because there is only a 7% of error for a false positive on surgery, which we think is the most critical way of failing the prediction, even though this means that the error of a false positive on angioplasty is going to be higher. This prevents patients from having a surgery, when they are required to have an angioplasty.</p>
 <pre style="background-color:#CED8F6;"><code class="hljs">##               Predicho
 ## Actual         ANGIOPLASTIA CIRUGIA
